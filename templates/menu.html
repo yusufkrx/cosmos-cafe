@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cosmos Game Cafe fiyat listesi — PS saatlik ücretler, maç günleri, içecekler ve atıştırmalıklar." />
+  <title>Menü & Fiyatlar | Cosmos Game Cafe — Sivas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<nav class="nav" role="navigation" aria-label="Ana Navigasyon">
+  <div class="container nav__inner">
+    <a href="{{ url_for('home') }}" class="nav__logo" aria-label="Cosmos Game Cafe Anasayfa">
+      <span class="nav__logo-icon" aria-hidden="true">🎮</span>
+      Cosmos Game Cafe
+    </a>
+
+    <ul class="nav__menu" id="main-menu">
+      <li><a href="{{ url_for('home') }}"  class="nav__link">Ana Sayfa</a></li>
+      <li><a href="{{ url_for('menu') }}"  class="nav__link nav__link--active">Menü & Fiyatlar</a></li>
+      <li><a href="{{ url_for('about') }}" class="nav__link">Hakkımızda</a></li>
+      <li>
+        <a href="https://wa.me/905XXXXXXXXX?text=Rezervasyon%20yapmak%20istiyorum."
+           target="_blank" rel="noopener" class="btn btn--primary">
+          📲 Rezervasyon
+        </a>
+      </li>
+    </ul>
+
+    <button class="nav__toggle" id="nav-toggle" aria-label="Menüyü Aç/Kapat" aria-expanded="false">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<header class="menu-header">
+  <div class="container">
+    <p class="menu-header__pretitle">Şeffaf Fiyatlandırma</p>
+    <h1 class="menu-header__title">
+      Menü &amp; <span>Fiyatlar</span>
+    </h1>
+    <p class="section-subtitle" style="margin-top:0.75rem;">
+      Sürpriz yok, gizli ücret yok — sadece iyi vakit.
+    </p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="menu-grid">
+
+      {% for category in categories %}
+      <section class="menu-category reveal">
+        <div class="menu-category__header">
+          <span class="menu-category__icon" aria-hidden="true">{{ category.icon }}</span>
+          <h2 class="menu-category__name">{{ category.name }}</h2>
+        </div>
+
+        <div class="menu-category__body">
+          {% for item in category.products %}
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <span class="menu-item__name">{{ item.name }}</span>
+
+              {% if item.description %}
+              <span class="menu-item__note">{{ item.description }}</span>
+              {% endif %}
+            </div>
+
+            {% if item.tag %}
+            <span class="menu-item__tag">{{ item.tag }}</span>
+            {% endif %}
+
+            <span class="menu-item__price">{{ item.price | int }} ₺</span>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+
+    </div>
+
+    <p class="reveal" style="
+        text-align:center;
+        color:var(--text-muted);
+        font-size:0.85rem;
+        padding-bottom:3rem;
+        margin-top:1rem;
+      ">
+      * Ücretsiz koltuk rezervasyonu için minimum 1 içecek siparişi gereklidir.
+      Fiyatlar KDV dahildir. Güncel fiyatlar için
+      <a href="https://wa.me/905XXXXXXXXX" target="_blank" rel="noopener"
+         style="color:var(--accent);">WhatsApp</a>'tan ulaşın.
+    </p>
+  </div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__brand-name">🎮 Cosmos Game Cafe</p>
+        <p class="footer__brand-desc">
+          Sivas'ta bir üniversite kampüsü içinde yer alan,
+          PS, maç yayını, kahve ve sosyalleşmenin buluştuğu nokta.
+        </p>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Sayfalar</h3>
+        <ul class="footer__links">
+          <li><a href="{{ url_for('home') }}" class="footer__link">Ana Sayfa</a></li>
+          <li><a href="{{ url_for('menu') }}"  class="footer__link">Menü & Fiyatlar</a></li>
+          <li><a href="{{ url_for('about') }}" class="footer__link">Hakkımızda</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__col-title">İletişim</h3>
+        <ul class="footer__links">
+          <li><span class="footer__link">📍 Sivas Kampüsü, [Bina Adı]</span></li>
+          <li><a href="tel:+905XXXXXXXXX" class="footer__link">📞 0 5XX XXX XX XX</a></li>
+          <li><a href="https://wa.me/905XXXXXXXXX" target="_blank" rel="noopener" class="footer__link">💬 WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 <span class="footer__bottom-accent">Cosmos Game Cafe</span>. Tüm hakları saklıdır.</span>
+      <span>Sivas, Türkiye 🇹🇷</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/905XXXXXXXXX?text=Merhaba%2C%20rezervasyon%20yapmak%20istiyorum."
+   target="_blank" rel="noopener" class="whatsapp-fab"
+   aria-label="WhatsApp ile rezervasyon yap">
+  <span class="whatsapp-fab__icon" aria-hidden="true">💬</span>
+  <span class="whatsapp-fab__label">Rezervasyon</span>
+</a>
+
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>

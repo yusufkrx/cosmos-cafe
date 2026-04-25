@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cosmos Game Cafe - Sivas PS ve eğlence kafesi." />
+  <title>Cosmos Game Cafe | PS & Eğlence Kafesi — Sivas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav__inner">
+    <a href="{{ url_for('home') }}" class="nav__logo">
+      <span class="nav__logo-icon">🎮</span>
+      Cosmos Game Cafe
+    </a>
+
+    <ul class="nav__menu" id="main-menu">
+      <li><a href="{{ url_for('home') }}" class="nav__link nav__link--active">Ana Sayfa</a></li>
+      <li><a href="{{ url_for('menu') }}" class="nav__link">Menü & Fiyatlar</a></li>
+      <li><a href="{{ url_for('about') }}" class="nav__link">Hakkımızda</a></li>
+      <li>
+        <a href="https://wa.me/905XXXXXXXXX?text=Rezervasyon%20yapmak%20istiyorum."
+           target="_blank" class="btn btn--primary">
+          📲 Rezervasyon
+        </a>
+      </li>
+    </ul>
+
+    <button class="nav__toggle" id="nav-toggle">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="ticker" style="position:relative;z-index:1;margin-top:70px;">
+  <div class="ticker__track">
+    <span class="ticker__item"><span class="ticker__dot"></span> PS5 &amp; PS4 Konsol Deneyimi</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Canlı Süper Lig Yayını</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Şampiyonlar Ligi Geceleri</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Özel Maç Günü Menüsü</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Tabu &amp; Kutu Oyunları</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Türk Kahvesi &amp; Espresso</span>
+
+    <span class="ticker__item"><span class="ticker__dot"></span> PS5 &amp; PS4 Konsol Deneyimi</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Canlı Süper Lig Yayını</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Şampiyonlar Ligi Geceleri</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Özel Maç Günü Menüsü</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Tabu &amp; Kutu Oyunları</span>
+    <span class="ticker__item"><span class="ticker__dot"></span> Türk Kahvesi &amp; Espresso</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Sivas Kampüsü'nün Yeni Buluşma Noktası</p>
+
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero__title-line">Oyun,</span>
+        <span class="hero__title-line">Maç,</span>
+        <span class="hero__title-line hero__title-line--accent" data-text="Eğlence.">Eğlence.</span>
+      </h1>
+
+      <p class="hero__description">
+        Sadece bir PS kafe değil — arkadaşlarınla maç izlediğin,
+        konsol tuttuğun, kahveni yudumladığın ve kendini
+        <strong style="color:var(--text-primary)">evinde hissettiğin</strong> yer.
+      </p>
+
+      <div class="hero__cta">
+        <a href="{{ url_for('menu') }}" class="btn btn--primary">🎯 Menüyü Gör</a>
+        <a href="{{ url_for('about') }}" class="btn btn--outline">📍 Bizi Bul</a>
+      </div>
+
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value" data-count="12" data-suffix="+">0+</span>
+          <span class="hero__stat-label">Konsol İstasyonu</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value" data-count="4" data-suffix="K">0K</span>
+          <span class="hero__stat-label">İnç Dev Ekran</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value" data-count="7" data-suffix="/7">0/7</span>
+          <span class="hero__stat-label">Açık Her Gün</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__console">
+        <div class="hero__console-ring"></div>
+        <div class="hero__console-ring"></div>
+        <div class="hero__console-ring"></div>
+        <div class="hero__console-core">
+          <span class="hero__console-icon">🎮</span>
+          <p class="hero__console-text">Cosmos Game Cafe</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__header reveal">
+      <h2 class="section-title">Ne <span>Sunuyoruz?</span></h2>
+      <p class="section-subtitle">Tek bir çatı altında dört farklı deneyim</p>
+    </div>
+
+    <div class="services__grid">
+      <article class="service-card reveal reveal--delay-1">
+        <span class="service-card__icon">🕹️</span>
+        <h3 class="service-card__title">PlayStation Deneyimi</h3>
+        <p class="service-card__description">
+          PS5 ve PS4 konsolarıyla son çıkan oyunlarda yarış, skor kır, rekabet et.
+          Saatlik ücretlendirme, grup indirimleri mevcuttur.
+        </p>
+        <span class="service-card__badge">PS5 & PS4</span>
+      </article>
+
+      <article class="service-card reveal reveal--delay-2">
+        <span class="service-card__icon">⚽</span>
+        <h3 class="service-card__title">Canlı Maç Yayını</h3>
+        <p class="service-card__description">
+          Süper Lig ve Şampiyonlar Ligi maçlarını dev ekranımızda,
+          kalabalık bir atmosferde izle. Her maç özel menü seçenekleri.
+        </p>
+        <span class="service-card__badge">HD Yayın</span>
+      </article>
+
+      <article class="service-card reveal reveal--delay-3">
+        <span class="service-card__icon">☕</span>
+        <h3 class="service-card__title">Kahve & İçecekler</h3>
+        <p class="service-card__description">
+          Türk kahvesinden espressoya, soğuk içeceklerden çaya —
+          enerjini yüksek tutan her şey burada. Uygun fiyat, sıcak ortam.
+        </p>
+        <span class="service-card__badge">Sıcak & Soğuk</span>
+      </article>
+
+      <article class="service-card reveal reveal--delay-4">
+        <span class="service-card__icon">🃏</span>
+        <h3 class="service-card__title">Kutu Oyunları</h3>
+        <p class="service-card__description">
+          Tabu, Uno, Monopoly ve daha fazlası. Arkadaş grupları için
+          masa tahsis edilir, özel turnuvalar düzenlenir.
+        </p>
+        <span class="service-card__badge">Ücretsiz Seçim</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="matchday reveal">
+      <div>
+        <div class="matchday__live">
+          <span class="matchday__live-dot"></span>
+          Maç Günü Özel
+        </div>
+        <h2 class="matchday__title">Bu Hafta Maçları Kaçırma!</h2>
+        <p class="matchday__subtitle">
+          Süper Lig ve Şampiyonlar Ligi maçları için dev ekranımız hazır.
+          Önceden rezervasyon yap, yerini garantile.
+        </p>
+      </div>
+      <a href="https://wa.me/905XXXXXXXXX?text=Ma%C3%A7%20g%C3%BCn%C3%BC%20rezervasyon%20yapmak%20istiyorum."
+         target="_blank" class="btn btn--primary" style="flex-shrink:0;">
+        📲 Yer Ayırt
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__header reveal">
+      <h2 class="section-title">Neden <span>Cosmos Game Cafe?</span></h2>
+      <p class="section-subtitle">Kampüste başka bir yer yok, inan bize.</p>
+    </div>
+
+    <div class="services__grid">
+      <div class="service-card reveal reveal--delay-1" style="text-align:center;">
+        <span class="service-card__icon">🏆</span>
+        <h3 class="service-card__title">Turnuvalar</h3>
+        <p class="service-card__description">Düzenli FIFA ve FPS turnuvaları. Katıl, kazan, ün kazan.</p>
+      </div>
+      <div class="service-card reveal reveal--delay-2" style="text-align:center;">
+        <span class="service-card__icon">💡</span>
+        <h3 class="service-card__title">Sessiz Çalışma Köşesi</h3>
+        <p class="service-card__description">Laptopunu getir, kahveni al; konsantrasyonlu bir çalışma alanı var.</p>
+      </div>
+      <div class="service-card reveal reveal--delay-3" style="text-align:center;">
+        <span class="service-card__icon">📶</span>
+        <h3 class="service-card__title">Hızlı Wi-Fi</h3>
+        <p class="service-card__description">Fiber bağlantı. Lag yok, kesinti yok. Online maçlar için biçilmiş kaftan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__brand-name">🎮 Cosmos Game Cafe</p>
+        <p class="footer__brand-desc">
+          Sivas'ta bir üniversite kampüsü içinde yer alan,
+          PS, maç yayını, kahve ve sosyalleşmenin buluştuğu nokta.
+        </p>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Sayfalar</h3>
+        <ul class="footer__links">
+          <li><a href="{{ url_for('home') }}"  class="footer__link">Ana Sayfa</a></li>
+          <li><a href="{{ url_for('menu') }}"  class="footer__link">Menü & Fiyatlar</a></li>
+          <li><a href="{{ url_for('about') }}" class="footer__link">Hakkımızda</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__col-title">İletişim</h3>
+        <ul class="footer__links">
+          <li><span class="footer__link">📍 Sivas Kampüsü, [Bina Adı]</span></li>
+          <li><a href="tel:+905XXXXXXXXX" class="footer__link">📞 0 5XX XXX XX XX</a></li>
+          <li><a href="https://wa.me/905XXXXXXXXX" target="_blank" class="footer__link">💬 WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 <span class="footer__bottom-accent">Cosmos Game Cafe</span>. Tüm hakları saklıdır.</span>
+      <span>Sivas, Türkiye 🇹🇷</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/905XXXXXXXXX?text=Merhaba%2C%20rezervasyon%20yapmak%20istiyorum."
+   target="_blank" class="whatsapp-fab">
+  <span class="whatsapp-fab__icon">💬</span>
+  <span class="whatsapp-fab__label">Rezervasyon</span>
+</a>
+
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>

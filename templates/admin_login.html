@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Girişi | Cosmos Game Cafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <style>
+        /* Sadece login sayfasına özel ortalama ayarları */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-primary);
+        }
+        .login-container {
+            background: var(--bg-card);
+            padding: 3rem 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-dim);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .login-container h1 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .login-container p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-dim);
+            color: var(--text-primary);
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            border-color: var(--accent);
+        }
+        .btn-login {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 77, 77, 0.1);
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 77, 77, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div style="font-size: 3rem; margin-bottom: 1rem;">👾</div>
+    <h1>Yönetim Paneli</h1>
+    <p>Sadece yetkili personel giriş yapabilir.</p>
+
+    {% if error %}
+    <div class="error-msg">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('admin_login') }}">
+        <div class="form-group">
+            <label for="username">KULLANICI ADI</label>
+            <input type="text" id="username" name="username" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="password">ŞİFRE</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn-login">Sisteme Gir</button>
+    </form>
+
+    <a href="{{ url_for('home') }}" style="display:inline-block; margin-top:1.5rem; color:var(--text-muted); font-size:0.8rem; text-decoration:none;">← Kafeye Dön</a>
+</div>
+
+</body>
+</html>

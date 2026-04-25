@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cosmos Game Cafe - Sivas Kampüsü PlayStation ve eğlence mekanı" />
+  <title>Hakkımızda | Cosmos Game Cafe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  <style>
+    /* sayfaya özel stiller */
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .team-card:hover {
+      border-color: var(--border-mid);
+      transform: translateX(4px);
+    }
+
+    .team-card__avatar {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .team-card__name {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .team-card__role {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .about-page-header {
+      padding: calc(var(--nav-h) + 4rem) 0 2rem;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid var(--border-dim);
+      margin-bottom: 4rem;
+    }
+
+    .about-page-header__inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about-page-header__eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: var(--accent-glow-sm);
+      margin-bottom: 1rem;
+    }
+
+    .about-page-header__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+    }
+
+    .about-page-header__title span {
+      color: var(--accent);
+      text-shadow: var(--accent-glow-lg);
+    }
+
+    .about-page-header__tag {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border-dim);
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-dim);
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius);
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      color: var(--accent);
+      border-color: var(--border-mid);
+      background: var(--accent-dim);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav__inner">
+
+    <a href="{{ url_for('home') }}" class="nav__logo">
+      <span class="nav__logo-icon">🎮</span>
+      Cosmos Game Cafe
+    </a>
+
+    <ul class="nav__menu" id="main-menu">
+      <li><a href="{{ url_for('home') }}" class="nav__link">Ana Sayfa</a></li>
+      <li><a href="{{ url_for('menu') }}" class="nav__link">Menü & Fiyatlar</a></li>
+      <li><a href="{{ url_for('about') }}" class="nav__link nav__link--active">Hakkımızda</a></li>
+
+      <li>
+        <a href="https://wa.me/905XXXXXXXXX?text=Rezervasyon%20yapmak%20istiyorum."
+           target="_blank"
+           class="btn btn--primary">
+          📲 Rezervasyon
+        </a>
+      </li>
+    </ul>
+
+    <button class="nav__toggle" id="nav-toggle">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+
+  </div>
+</nav>
+
+<header class="about-page-header">
+  <div class="container">
+    <div class="about-page-header__inner">
+
+      <div>
+        <p class="about-page-header__eyebrow">Tanışalım</p>
+        <h1 class="about-page-header__title">
+          Biz <span>Kimiz?</span>
+        </h1>
+      </div>
+
+      <span class="about-page-header__tag">📍 Sivas Kampüsü</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="about-grid">
+
+      <div>
+        <article class="reveal">
+          <p class="about-content__label">Hikayemiz</p>
+
+          <h2 class="about-content__title">
+            Kampüsün En <span>Enerjik</span> Köşesi
+          </h2>
+
+          <p class="about-content__text">
+            Cosmos Game Cafe, Sivas'taki üniversite kampüsünün içinde doğdu.
+            Bir avuç öğrencinin "keşke burada böyle bir yer olsaydı" hayali,
+            bugün gerçeğe dönüştü.
+          </p>
+
+          <p class="about-content__text">
+            Biz sadece bir PlayStation kafesi değiliz — bir buluşma noktasıyız.
+          </p>
+
+          <p class="about-content__text">
+            Burası; sınav stresini atan, maç izleyen,
+            kahve içen ve vakit geçiren insanların mekanı.
+          </p>
+        </article>
+
+        <div class="about-values reveal">
+          <div class="about-values__item">
+            <span class="about-values__icon">⚡</span>
+            <span>Öğrenci dostu fiyatlar</span>
+          </div>
+
+          <div class="about-values__item">
+            <span class="about-values__icon">🎯</span>
+            <span>Kaliteli ekipman</span>
+          </div>
+
+          <div class="about-values__item">
+            <span class="about-values__icon">🤝</span>
+            <span>Samimi ortam</span>
+          </div>
+
+          <div class="about-values__item">
+            <span class="about-values__icon">🏟️</span>
+            <span>Maç günleri tribün atmosferi</span>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:2rem;">
+          <p class="about-content__label">Bizi Takip Et</p>
+
+          <div class="social-links">
+            <a href="#" class="social-link">📸 Instagram</a>
+            <a href="#" class="social-link">🐦 Twitter / X</a>
+            <a href="https://wa.me/905XXXXXXXXX" target="_blank" class="social-link">💬 WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="map-placeholder reveal" style="margin-top:2.5rem;">
+          <div class="map-placeholder__icon">🗺️</div>
+          <h3 class="map-placeholder__title">Kampüste Neredeyiz?</h3>
+
+          <p class="map-placeholder__text">
+            [Üniversite Adı] kampüsü içinde, [Bina/Blok Adı] zemin katında yer almaktayız.
+          </p>
+
+          <a href="#" target="_blank" class="btn btn--outline" style="margin-top:1.25rem;display:inline-flex;">
+            📍 Haritada Gör
+          </a>
+        </div>
+
+      </div>
+
+      <aside>
+        <div class="contact-card reveal reveal--delay-1">
+
+          <div class="contact-card__header">
+            <h2 class="contact-card__title">📞 İletişim & Adres</h2>
+          </div>
+
+          <div class="contact-card__body">
+
+            <div class="contact-item">
+              <span class="contact-item__icon">📍</span>
+              <div>
+                <p class="contact-item__label">Adres</p>
+                <p class="contact-item__value">
+                  Kampüs içi, [Bina/Blok], Zemin Kat<br>
+                  Sivas / Türkiye
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-item__icon">📞</span>
+              <div>
+                <p class="contact-item__label">Telefon</p>
+                <p class="contact-item__value">
+                  <a href="tel:+905XXXXXXXXX">0 5XX XXX XX XX</a>
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="contact-card__actions">
+            <a href="https://wa.me/905XXXXXXXXX"
+               target="_blank"
+               class="btn btn--primary"
+               style="justify-content:center;">
+              💬 WhatsApp
+            </a>
+
+            <a href="tel:+905XXXXXXXXX"
+               class="btn btn--outline"
+               style="justify-content:center;">
+              📞 Ara
+            </a>
+
+            <a href="{{ url_for('menu') }}"
+               class="btn btn--ghost"
+               style="justify-content:center;">
+              🎯 Menü
+            </a>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer__inner">
+      <div>
+        <p class="footer__brand-name">🎮 Cosmos Game Cafe</p>
+        <p class="footer__brand-desc">
+          Kampüste PS, kahve ve sosyalleşmenin birleştiği yer.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Cosmos Game Cafe</span>
+      <span>Sivas 🇹🇷</span>
+    </div>
+
+  </div>
+</footer>
+
+<a href="https://wa.me/905XXXXXXXXX"
+   target="_blank"
+   class="whatsapp-fab">
+  <span class="whatsapp-fab__icon">💬</span>
+  <span class="whatsapp-fab__label">Rezervasyon</span>
+</a>
+
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+
+</body>
+</html>

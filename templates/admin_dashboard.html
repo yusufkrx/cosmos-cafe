@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yönetim Paneli | Cosmos Game Cafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <style>
+        .dashboard-header { padding: 2rem 0; border-bottom: 1px solid var(--border-dim); display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .admin-section { background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border-dim); margin-bottom: 2rem; }
+        .section-title { font-family: var(--font-display); color: var(--accent); margin-bottom: 1.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* Tablo Ayarlari */
+        .admin-table { width: 100%; border-collapse: collapse; }
+        .admin-table th, .admin-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border-dim); }
+        .admin-table th { color: var(--text-muted); font-size: 0.7rem; font-family: var(--font-display); }
+
+        /* Inputlar */
+        .input-field { background: var(--bg-secondary); border: 1px solid var(--border-dim); color: var(--text-primary); padding: 0.5rem; border-radius: 4px; font-size: 0.85rem; width: 100%; }
+        .input-field:focus { border-color: var(--accent); outline: none; }
+
+        /* Durum Tagleri */
+        .status-badge { font-size: 0.65rem; padding: 0.2rem 0.5rem; border-radius: 4px; cursor: pointer; }
+        .status-active { background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid #4ade80; }
+        .status-passive { background: rgba(248, 113, 113, 0.1); color: #f87171; border: 1px solid #f87171; }
+
+        /* Yeni Urun Formu */
+        .add-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; align-items: flex-end; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="dashboard-header">
+        <div>
+            <h1 style="font-family: var(--font-display);">Cosmos <span style="color: var(--accent);">Admin</span></h1>
+            <p style="color: var(--text-muted); font-size: 0.8rem;">Menü yönetimi ve canlı güncellemeler.</p>
+        </div>
+        <div style="display:flex; gap:1rem;">
+            <a href="{{ url_for('menu') }}" target="_blank" class="btn btn--outline" style="font-size:0.7rem;">Menüyü Gör</a>
+            <a href="{{ url_for('logout') }}" class="btn btn--primary" style="background:#ff4d4d; border-color:#ff4d4d; font-size:0.7rem;">Çıkış</a>
+        </div>
+    </header>
+
+    <section class="admin-section">
+        <h2 class="section-title">✨ Yeni Ürün Ekle</h2>
+        <form action="{{ url_for('add_product') }}" method="POST" class="add-form">
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-muted);">KATEGORİ</label>
+                <select name="category_id" class="input-field" required>
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-muted);">ÜRÜN ADI</label>
+                <input type="text" name="name" class="input-field" placeholder="Örn: Latte" required>
+            </div>
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-muted);">AÇIKLAMA</label>
+                <input type="text" name="description" class="input-field" placeholder="Örn: 2 shot espresso">
+            </div>
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-muted);">FİYAT</label>
+                <input type="number" name="price" class="input-field" placeholder="₺" required>
+            </div>
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-muted);">ETİKET</label>
+                <input type="text" name="tag" class="input-field" placeholder="Popüler/Yeni">
+            </div>
+            <button type="submit" class="btn btn--primary" style="padding: 0.6rem;">Ekle</button>
+        </form>
+    </section>
+
+    <section class="admin-section">
+        <h2 class="section-title">📝 Ürünleri Düzenle</h2>
+        <table class="admin-table">
+            <thead>
+            <tr>
+                <th>KAT.</th>
+                <th>ÜRÜN ADI</th>
+                <th>AÇIKLAMA / NOT</th>
+                <th>ETİKET</th>
+                <th>FİYAT</th>
+                <th>DURUM</th>
+                <th>İŞLEMLER</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+            <tr>
+                <form method="POST" action="{{ url_for('update_product', product_id=product.id) }}">
+                    <td style="font-size:0.7rem; color:var(--text-muted);">{{ product.cat_name }}</td>
+                    <td><input type="text" name="name" value="{{ product.name }}" class="input-field"></td>
+                    <td><input type="text" name="description" value="{{ product.description or '' }}" class="input-field"></td>
+                    <td><input type="text" name="tag" value="{{ product.tag or '' }}" class="input-field" style="width:80px;"></td>
+                    <td><input type="number" name="price" value="{{ product.price | int }}" class="input-field" style="width:70px;"></td>
+                    <td>
+                        <label style="cursor: pointer;">
+                            <input type="checkbox" name="is_active" {% if product.is_active %}checked{% endif %} style="display:none;" onchange="this.form.submit()">
+                            <span class="status-badge {% if product.is_active %}status-active{% else %}status-passive{% endif %}">
+                    {% if product.is_active %}Açık{% else %}Gizli{% endif %}
+                  </span>
+                        </label>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 0.4rem;">
+                            <button type="submit" class="btn btn--outline" style="padding: 0.4rem; font-size: 0.6rem;">Kaydet</button>
+
+                            <button type="submit" formaction="{{ url_for('delete_product', product_id=product.id) }}" class="btn btn--primary" style="background:#ff4d4d; border-color:#ff4d4d; padding: 0.4rem; font-size: 0.6rem;" onclick="return confirm('Bu ürünü tamamen silmek istediğine emin misin? (Geri alınamaz)');">Sil</button>
+                        </div>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+
+</body>
+</html>
